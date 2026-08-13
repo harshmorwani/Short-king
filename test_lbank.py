@@ -1,32 +1,19 @@
-import json
-from websocket import create_connection
+import requests
 
-URL = "wss://lbkperpws.lbank.com/ws"
+URL = "https://lbkperp.lbank.com/cfd/openApi/v1/pub/marketData"
 
-print("Connecting to LBank...")
-
-ws = create_connection(URL, timeout=20)
-
-payload = {
-    "action": "request",
-    "request": "kbar",
-    "kbar": "1hr",
-    "pair": "BTCUSDT",
-    "size": "2"
-}
-
-print("Sending request...")
-ws.send(json.dumps(payload))
-
-print("Waiting for response...")
+print("Testing LBank REST API...")
 
 try:
-    while True:
-        message = ws.recv()
-        print("RESPONSE:")
-        print(message)
-        break
-finally:
-    ws.close()
+    r = requests.get(
+        URL,
+        params={"productGroup": "SwapU"},
+        timeout=20
+    )
 
-print("Test finished.")
+    print("Status:", r.status_code)
+    print("Response:")
+    print(r.text[:3000])
+
+except Exception as e:
+    print("ERROR:", e)
