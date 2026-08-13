@@ -1,7 +1,7 @@
 import json
 from websocket import create_connection
 
-URL = "wss://lbkperp.lbank.com/ws"
+URL = "wss://lbkperpws.lbank.com/ws"
 
 print("Connecting to LBank...")
 
