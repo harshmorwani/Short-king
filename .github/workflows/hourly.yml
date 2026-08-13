@@ -3,7 +3,7 @@ name: LBank Futures Doji Scanner
 on:
   workflow_dispatch:
   schedule:
-    - cron: "3 * * * *"
+    - cron: "0 * * * *"
 
 jobs:
   scan:
